@@ -27,8 +27,8 @@ public class HomeActivity extends AppCompatActivity {
         ternaksapi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(HomeActivity.this, SapiActivity.class));
-//                finish();
+               startActivity(new Intent(HomeActivity.this, SapiActivity.class));
+               finish();
 
             }
         });
