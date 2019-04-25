@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Home</string>
+    <string name="title_activity_sapi">Data Sapi</string>
+    <string name="title_activity_kambing">Data Kambing</string>
+    <string name="title_activity_domba">Data Domba</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_pembelian">Pembelian Hewan</string>
+</resources>

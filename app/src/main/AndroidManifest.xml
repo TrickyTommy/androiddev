@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bansolinc.ternaknesiafix">
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label=""
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Menuactivity" />
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".SapiActivity"
+            android:label="@string/title_activity_sapi"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".KambingActivity"
+            android:label="@string/title_activity_kambing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DombaActivity"
+            android:label="@string/title_activity_domba"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PembelianActivity"
+            android:label="@string/title_activity_pembelian"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddActivity"></activity>
+    </application>
+
+</manifest>
