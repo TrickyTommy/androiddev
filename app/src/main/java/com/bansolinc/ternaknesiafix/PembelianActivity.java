@@ -1,6 +1,5 @@
 package com.bansolinc.ternaknesiafix;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -9,10 +8,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,7 +32,6 @@ public class PembelianActivity extends AppCompatActivity {
     String[] tinggi_hewan;
     String[] jenis_kelamin;
     String[] tanggal_beli;
-    TextView view_jumlah;
     //String[] jumlah;
     ListView listView;
     SwipeRefreshLayout swipe_refresh;
@@ -51,7 +47,6 @@ public class PembelianActivity extends AppCompatActivity {
         swipe_refresh   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        view_jumlah = (TextView)findViewById(R.id.view_jumlah);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -80,10 +75,11 @@ public class PembelianActivity extends AppCompatActivity {
         collectData();
        CustomListView customListView=new CustomListView(this,id_hewan,nama_kategori,harga_beli,bobot_beli,tinggi_hewan,jenis_kelamin,tanggal_beli);
         listView.setAdapter(customListView);
+        ArrayList arrayList = null;
+        arrayList.size();
 
     }
 
-    @SuppressLint("SetTextI18n")
     private void collectData()
     {
 //Connection
@@ -120,8 +116,6 @@ public class PembelianActivity extends AppCompatActivity {
         try{
             JSONArray ja=new JSONArray(result);
             JSONObject jo=null;
-
-
             id_hewan=new String[ja.length()];
             nama_kategori=new String[ja.length()];
             harga_beli=new String[ja.length()];
@@ -141,17 +135,7 @@ public class PembelianActivity extends AppCompatActivity {
                 jenis_kelamin[i]=jo.getString("jenis_kelamin");
                 tanggal_beli[i]=jo.getString("tanggal_beli");
                 //jumlah[i]=jo.getString("tanggal_beli");
-
-                Log.d("harga ", harga_beli[i]=jo.getString("harga_beli"));
-
-
-                view_jumlah.setText(""+ja.length());
-
             }
-
-            listView.deferNotifyDataSetChanged();
-
-
 //            swipe_refresh.setRefreshing(false);
         }
         catch (Exception ex)

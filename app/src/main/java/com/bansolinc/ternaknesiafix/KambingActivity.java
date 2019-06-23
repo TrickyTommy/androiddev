@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,7 +34,6 @@ public class KambingActivity extends AppCompatActivity {
     String[] tinggi_hewan;
     String[] jenis_kelamin;
     String[] tanggal_beli;
-    TextView view_jumlah;
     //String[] jumlah;
     BufferedInputStream is;
     String line=null;
@@ -50,7 +48,6 @@ public class KambingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kambing);
         swipe_refresh   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        view_jumlah = (TextView)findViewById(R.id.text_kambing);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -136,12 +133,7 @@ public class KambingActivity extends AppCompatActivity {
                 tinggi_hewan[i]=jo.getString("tinggi_hewan");
                 jenis_kelamin[i]=jo.getString("jenis_kelamin");
                 tanggal_beli[i]=jo.getString("tanggal_beli");
-
-                view_jumlah.setText(""+ja.length());
-
             }
-
-            listView.deferNotifyDataSetChanged();
 //            swipe_refresh.setRefreshing(false);
         }
         catch (Exception ex)
