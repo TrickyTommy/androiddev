@@ -1,152 +1,256 @@
 package com.bansolinc.ternaknesiafix;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.renderscript.Sampler;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.bansolinc.ternaknesiafix.adapter.Adapter;
+import com.bansolinc.ternaknesiafix.app.AppController;
+import com.bansolinc.ternaknesiafix.model.DataModel;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import okhttp3.OkHttpClient;
+import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PembelianActivity extends AppCompatActivity {
-    String urladdress="http://trickyserver.ddns.net/connectandroid/includes/tampilpembelian.php";
-    String[] id_hewan;
-    String[] nama_kategori;
-    String[] harga_beli;
-    String[] bobot_beli;
-    String[] tinggi_hewan;
-    String[] jenis_kelamin;
-    String[] tanggal_beli;
-    //String[] jumlah;
-    ListView listView;
-    SwipeRefreshLayout swipe_refresh;
-    BufferedInputStream is;
-    String line=null;
-    String result=null;
-    private final OkHttpClient client = new OkHttpClient();
+public class PembelianActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
+        SearchView.OnQueryTextListener {
+
+    ProgressDialog pDialog;
+    List<DataModel> listData = new ArrayList<DataModel>();
+    Adapter adapter;
+    SwipeRefreshLayout swipe;
+    ListView list_view;
+
+
+    /* 10.0.2.2 adalah IP Address localhost EMULATOR ANDROID STUDIO,
+    Ganti IP Address tersebut dengan IP Laptop Apabila di RUN di HP. HP dan Laptop harus 1 jaringan */
+    public static final String url_data = "http://172.18.1.175/connectandroid/includes/tampilpembelian.php";
+    public static final String url_cari = "http://172.18.1.175/connectandroid/includes/cari_data.php";
+
+    private static final String TAG = PembelianActivity.class.getSimpleName();
+
+    public static final String TAG_ID = "id_hewan";
+    public static final String TAG_NAMA = "nama_kategori";
+    public static final String TAG_harga_beli = "harga_beli";
+    public static final String TAG_bobot_beli = "bobot_beli";
+    public static final String TAG_tinggi_hewan = "tinggi_hewan";
+    public static final String TAG_jenis_kelamin = "jenis_kelamin";
+    public static final String TAG_tanggal_beli = "tanggal_beli";
+    public static final String TAG_RESULTS = "results";
+    public static final String TAG_MESSAGE = "message";
+    public static final String TAG_VALUE = "value";
+
+    String tag_json_obj = "json_obj_req";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pembelian);
-        swipe_refresh   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        list_view = (ListView) findViewById(R.id.list_view);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PembelianActivity.this, AddActivity.class));
+        adapter = new Adapter(PembelianActivity.this, listData);
+        list_view.setAdapter(adapter);
 
-            }
-        });
+        swipe.setOnRefreshListener(this);
 
-        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                startActivity(new Intent(PembelianActivity.this, PembelianActivity.class));
-                finish();
-
-
-            }
-        });
-
-        listView=(ListView)findViewById(R.id.list_pembelian);
-
-        StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
-
-        collectData();
-       CustomListView customListView=new CustomListView(this,id_hewan,nama_kategori,harga_beli,bobot_beli,tinggi_hewan,jenis_kelamin,tanggal_beli);
-        listView.setAdapter(customListView);
-        ArrayList arrayList = null;
-        arrayList.size();
+        swipe.post(new Runnable() {
+                       @Override
+                       public void run() {
+                           swipe.setRefreshing(true);
+                           callData();
+                       }
+                   }
+        );
 
     }
 
-    private void collectData()
-    {
-//Connection
-        try{
+    private void callData() {
+        listData.clear();
+        adapter.notifyDataSetChanged();
+        swipe.setRefreshing(true);
 
-            URL url=new URL(urladdress);
-            HttpURLConnection con=(HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            is=new BufferedInputStream(con.getInputStream());
+        // Creating volley request obj
+        JsonArrayRequest jArr = new JsonArrayRequest(url_data, new Response.Listener<JSONArray>() {
 
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        //content
-        try{
-            BufferedReader br=new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb=new StringBuilder();
-            while ((line=br.readLine())!=null){
-                sb.append(line+"\n");
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.e(TAG, response.toString());
+
+                // Parsing json
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+
+                        DataModel item = new DataModel();
+
+                        item.setId_hewan(obj.getString(TAG_ID));
+                        item.setNama_kategori(obj.getString(TAG_NAMA));
+                        item.setHarga_beli(obj.getString(TAG_harga_beli));
+                        item.setBobot_beli(obj.getString(TAG_bobot_beli));
+                        item.setTinggi_hewan(obj.getString(TAG_tinggi_hewan));
+                        item.setJenis_kelamin(obj.getString(TAG_jenis_kelamin));
+                        item.setTanggal_beli(obj.getString(TAG_tanggal_beli));
+
+                        listData.add(item);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // notifying list adapter about data changes
+                // so that it renders the list view with updated data
+                adapter.notifyDataSetChanged();
+                swipe.setRefreshing(false);
             }
-            is.close();
-            result=sb.toString();
+        }, new Response.ErrorListener() {
 
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-
-        }
-
-//JSON
-        try{
-            JSONArray ja=new JSONArray(result);
-            JSONObject jo=null;
-            id_hewan=new String[ja.length()];
-            nama_kategori=new String[ja.length()];
-            harga_beli=new String[ja.length()];
-            bobot_beli=new String[ja.length()];
-            tinggi_hewan=new String[ja.length()];
-            jenis_kelamin=new String[ja.length()];
-            tanggal_beli=new String[ja.length()];
-           // jumlah=new String[ja.length()];
-
-            for(int i=0;i<=ja.length();i++){
-                jo=ja.getJSONObject(i);
-                id_hewan[i]=jo.getString("id_hewan");
-                nama_kategori[i]=jo.getString("nama_kategori");
-                harga_beli[i]=jo.getString("harga_beli");
-                bobot_beli[i]=jo.getString("bobot_beli");
-                tinggi_hewan[i]=jo.getString("tinggi_hewan");
-                jenis_kelamin[i]=jo.getString("jenis_kelamin");
-                tanggal_beli[i]=jo.getString("tanggal_beli");
-                //jumlah[i]=jo.getString("tanggal_beli");
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(PembelianActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                swipe.setRefreshing(false);
             }
-//            swipe_refresh.setRefreshing(false);
-        }
-        catch (Exception ex)
-        {
+        });
 
-            ex.printStackTrace();
-        }
-        swipe_refresh.setRefreshing(false);
-
-
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jArr);
     }
 
+
+    @Override
+    public void onRefresh() {
+        callData();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        cariData(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setQueryHint(getString(R.string.type_name));
+        searchView.setIconified(true);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    private void cariData(final String keyword) {
+        pDialog = new ProgressDialog(PembelianActivity.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_cari, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+
+                    int value = jObj.getInt(TAG_VALUE);
+
+                    if (value == 1) {
+//                        listData.clear();
+                        adapter.notifyDataSetChanged();
+
+                        String getObject = jObj.getString(TAG_RESULTS);
+                        JSONArray jsonArray = new JSONArray(getObject);
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
+
+                            DataModel data = new DataModel();
+
+                            data.setId_hewan(obj.getString(TAG_ID));
+                            data.setNama_kategori(obj.getString(TAG_NAMA));
+                            data.setHarga_beli(obj.getString(TAG_harga_beli));
+                            data.setBobot_beli(obj.getString(TAG_bobot_beli));
+                            data.setTinggi_hewan(obj.getString(TAG_tinggi_hewan));
+                            data.setJenis_kelamin(obj.getString(TAG_jenis_kelamin));
+                            data.setTanggal_beli(obj.getString(TAG_tanggal_beli));
+
+
+                            listData.add(data);
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                }
+
+                adapter.notifyDataSetChanged();
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("keyword", keyword);
+
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+        pDialog.dismiss();
+    }
 
 }

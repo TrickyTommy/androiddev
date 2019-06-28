@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    android:orientation="vertical"
     tools:showIn="@layout/activity_sapi">
 
     <android.support.v7.widget.CardView
@@ -44,13 +44,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/text_saldo"
                 android:text="SEMUA"
-                android:textSize="16dp"
                 android:textAlignment="center"
+                android:textSize="16dp"
                 android:textStyle="bold" />
-
-
-
-
 
 
         </RelativeLayout>
@@ -58,12 +54,12 @@
     </android.support.v7.widget.CardView>
 
 
-
     <android.support.v7.widget.CardView
-        android:layout_margin="5dp"
-        android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
@@ -75,7 +71,8 @@
                 android:layout_height="wrap_content">
 
             </ListView>
-        </android.support.v4.widget.SwipeRefreshLayout>i
+        </android.support.v4.widget.SwipeRefreshLayout>
+        i
 
     </android.support.v7.widget.CardView>
 

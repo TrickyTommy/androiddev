@@ -27,8 +27,9 @@ import okhttp3.OkHttpClient;
 
 public class SapiActivity extends AppCompatActivity {
 
+
     ListView listView;
-    String urladdress="http://trickyserver.ddns.net/connectandroid/includes/tampilsapi.php/";
+    String urladdress="http://trickyserver.ddns.net/connectandroid/includes/tampilsapi.php";
     String[] id_hewan;
     String[] nama_kategori;
     String[] harga_beli;
@@ -36,7 +37,7 @@ public class SapiActivity extends AppCompatActivity {
     String[] tinggi_hewan;
     String[] jenis_kelamin;
     String[] tanggal_beli;
-    // String[] jumlah;
+    //String[] jumlah;
     BufferedInputStream is;
     String line=null;
     String result=null;
@@ -73,7 +74,7 @@ public class SapiActivity extends AppCompatActivity {
             }
         });
 
-        listView=(ListView)findViewById(R.id.list_domba);
+        listView=(ListView)findViewById(R.id.list_sapi);
 
         StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
 
@@ -81,29 +82,7 @@ public class SapiActivity extends AppCompatActivity {
         swipe_refresh.setRefreshing(false);
         CustomListView customListView=new CustomListView(this,id_hewan,nama_kategori,harga_beli,bobot_beli,tinggi_hewan,jenis_kelamin,tanggal_beli);
         listView.setAdapter(customListView);
-//        lv = customListView;
-        Log.d("listview", String.valueOf(customListView));
-
     }
-//    private void actionModeDialpad() {
-//
-//
-//
-//        for(int i = 0; i < customListView.getCount(); i++) {
-//            if(lv.isItemChecked(i)) {
-//                mAdapter.getItem(i);
-//                String number = mAdapter.getCallRemoteAtPostion(i);
-//                if(!TextUtils.isEmpty(number)) {
-//                    Intent it = new Intent(Intent.ACTION_DIAL);
-//                    it.setData(SipUri.forgeSipUri(SipManager.PROTOCOL_SIP, number));
-//                    startActivity(it);
-//                }
-//                break;
-//            }
-//        }
-//        mMode.invalidate();
-//
-//    }
     private void collectData()
     {
 //Connection
@@ -173,5 +152,4 @@ public class SapiActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menusapi, menu);
         return true;
     }
-
 }

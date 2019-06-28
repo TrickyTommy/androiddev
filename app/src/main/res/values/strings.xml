@@ -7,4 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_pembelian">Pembelian Hewan</string>
+    <string name="app_names">SearchView-MySQL</string>
+    <string name="search">Search</string>
+    <string name="type_name">Cari Kategori Hewan</string>
 </resources>
