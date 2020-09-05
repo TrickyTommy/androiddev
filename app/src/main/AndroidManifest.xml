@@ -3,15 +3,21 @@
     package="com.bansolinc.ternaknesiafix">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label=""
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".LabaRugiActivity"
+            android:label="@string/title_activity_laba_rugi"
+            ></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddPenjualanActivity" />
+        <activity android:name=".AddActivityKg" />
+        <activity android:name=".LaporanActivity" />
+        <activity
+            android:name=".PenjualanActivity"
+            android:label="@string/title_activity_penjualan" />
         <activity android:name=".Menuactivity" />
         <activity android:name=".HomeActivity" />
         <activity
@@ -36,7 +48,7 @@
         <activity android:name=".AddActivity" />
         <activity
             android:name=".PembelianActivity"
-            android:label="@string/title_activity_pembelian"></activity>
+            android:label="@string/title_activity_pembelian" />
     </application>
 
 </manifest>

@@ -10,4 +10,25 @@
     <string name="app_names">SearchView-MySQL</string>
     <string name="search">Search</string>
     <string name="type_name">Cari Kategori Hewan</string>
+    <string name="type_name_penjualan">Cari Kategori Hewan</string>
+    <string name="title_activity_penjualan">PenjualanActivity</string>
+    <string name="title_activity_addtab">AddtabActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string-array name="array_bulan">
+        <item>-Pilih-</item>
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
+    <string name="title_activity_laba_rugi">LabaRugiActivity</string>
 </resources>

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,11 +26,14 @@ import java.net.URL;
 
 import okhttp3.OkHttpClient;
 
+import static com.bansolinc.ternaknesiafix.BuildConfig.BASE_URL;
+
 public class SapiActivity extends AppCompatActivity {
 
 
     ListView listView;
-    String urladdress="http://trickyserver.ddns.net/connectandroid/includes/tampilsapi.php";
+   // String urladdress="http://192.168.43.153/connectandroid/includes/tampilsapi.php";
+    String urladdress= BASE_URL+"tampilsapi.php";
     String[] id_hewan;
     String[] nama_kategori;
     String[] harga_beli;
@@ -37,10 +41,12 @@ public class SapiActivity extends AppCompatActivity {
     String[] tinggi_hewan;
     String[] jenis_kelamin;
     String[] tanggal_beli;
+    String[] status_jual;
     //String[] jumlah;
     BufferedInputStream is;
     String line=null;
     String result=null;
+    TextView text_sapi;
     private final OkHttpClient client = new OkHttpClient();
 
     SwipeRefreshLayout swipe_refresh;
@@ -52,15 +58,19 @@ public class SapiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sapi);
         swipe_refresh   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 
+         text_sapi = (TextView) findViewById(R.id.text_sapi);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Pembelian Hewan", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                startActivity(new Intent(SapiActivity.this, AddActivity.class));
             }
         });
 
@@ -80,7 +90,7 @@ public class SapiActivity extends AppCompatActivity {
 
         collectData();
         swipe_refresh.setRefreshing(false);
-        CustomListView customListView=new CustomListView(this,id_hewan,nama_kategori,harga_beli,bobot_beli,tinggi_hewan,jenis_kelamin,tanggal_beli);
+        CustomListView customListView=new CustomListView(this,id_hewan,nama_kategori,harga_beli,bobot_beli,tinggi_hewan,jenis_kelamin,tanggal_beli,status_jual);
         listView.setAdapter(customListView);
     }
     private void collectData()
@@ -126,6 +136,7 @@ public class SapiActivity extends AppCompatActivity {
             tinggi_hewan=new String[ja.length()];
             jenis_kelamin=new String[ja.length()];
             tanggal_beli=new String[ja.length()];
+            status_jual=new String[ja.length()];
 
             for(int i=0;i<=ja.length();i++){
                 jo=ja.getJSONObject(i);
@@ -136,7 +147,11 @@ public class SapiActivity extends AppCompatActivity {
                 tinggi_hewan[i]=jo.getString("tinggi_hewan");
                 jenis_kelamin[i]=jo.getString("jenis_kelamin");
                 tanggal_beli[i]=jo.getString("tanggal_beli");
+                status_jual[i]=jo.getString("status_jual");
+                text_sapi.setText(""+ja.length());
             }
+
+
 //            swipe_refresh.setRefreshing(false);
         }
         catch (Exception ex)

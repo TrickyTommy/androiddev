@@ -9,6 +9,8 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        //buildConfigField "String", "BASE_URL", "\"https://trickytommy.000webhostapp.com/\""
+       buildConfigField "String", "BASE_URL", "\"http://trickyserver.ddns.net/includes/\""
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -36,6 +38,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     ///
     //implementation 'com.github.therealshabi:AutoImageFlipper:v1.4.1'
+
 
 //    implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
     testImplementation 'junit:junit:4.12'

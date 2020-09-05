@@ -28,11 +28,12 @@ public class CustomListView extends ArrayAdapter<String> {
     private String[] tinggi_hewan;
     private String[] jenis_kelamin;
     private String[] tanggal_beli;
+    private String[] status_jual;
    // private String[] jumlah;
     private Activity context;
    // Bitmap bitmap;
 
-    public CustomListView(Activity context, String[] id_hewan,String[] nama_kategori, String[] harga_beli, String[] bobot_beli, String[] tinggi_hewan, String[] jenis_kelamin, String[] tanggal_beli) {
+    public CustomListView(Activity context, String[] id_hewan,String[] nama_kategori, String[] harga_beli, String[] bobot_beli, String[] tinggi_hewan, String[] jenis_kelamin, String[] tanggal_beli, String[] status_jual) {
         super(context, R.layout.layout,id_hewan);
         this.context=context;
         this.nama_kategori=nama_kategori;
@@ -42,6 +43,7 @@ public class CustomListView extends ArrayAdapter<String> {
         this.tinggi_hewan=tinggi_hewan;
         this.jenis_kelamin =jenis_kelamin;
         this.tanggal_beli=tanggal_beli;
+        this.status_jual=status_jual;
        // this.jumlah=jumlah;
     }
 
@@ -68,6 +70,7 @@ public class CustomListView extends ArrayAdapter<String> {
         viewHolder.viewtinggi_hewan.setText(tinggi_hewan[position]);
         viewHolder.viewjenis_kelamin.setText(jenis_kelamin[position]);
         viewHolder.viewtanggal_beli.setText(tanggal_beli[position]);
+        viewHolder.viewstatus_jual.setText(status_jual[position]);
        // viewHolder.viewjumlah.setText(jumlah[position]);
 
         return r;
@@ -81,6 +84,7 @@ public class CustomListView extends ArrayAdapter<String> {
         TextView viewtinggi_hewan;
         TextView viewjenis_kelamin;
         TextView viewtanggal_beli;
+        TextView viewstatus_jual;
        // TextView viewjumlah;
 
 
@@ -91,6 +95,7 @@ public class CustomListView extends ArrayAdapter<String> {
             viewtinggi_hewan=(TextView)v.findViewById(R.id.viewtinggi_hewan);
             viewjenis_kelamin=(TextView)v.findViewById(R.id.viewjenis_kelamin);
             viewtanggal_beli=(TextView)v.findViewById(R.id.viewtanggal_beli);
+            viewstatus_jual=(TextView)v.findViewById(R.id.viewStatusJual);
            // viewtanggal_beli=(TextView)v.findViewById(R.id.view_jumlah);
         }
 

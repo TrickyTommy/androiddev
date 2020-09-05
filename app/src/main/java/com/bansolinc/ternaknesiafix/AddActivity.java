@@ -38,6 +38,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.bansolinc.ternaknesiafix.BuildConfig.BASE_URL;
+
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
     ArrayList<String> listitem = new ArrayList<>();
     ArrayAdapter<String> adapterKategori;
@@ -181,7 +183,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             String result = "";
             try {
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://trickyserver.ddns.net/connectandroid/includes/tampilCombobox.php");
+                HttpPost httppost = new HttpPost(BASE_URL+"tampilCombobox.php");
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();
                 // Get our response as a String.
@@ -241,7 +243,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             String resultstatus = "";
             try {
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://trickyserver.ddns.net/connectandroid/includes/combostatus.php");
+                HttpPost httppost = new HttpPost(BASE_URL+"combostatus.php");
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();
                 // Get our response as a String.

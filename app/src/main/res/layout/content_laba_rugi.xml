@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".LabaRugiActivity"
+    tools:showIn="@layout/activity_laba_rugi">
+
+    <TableLayout
+        android:id="@+id/demotable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:stretchColumns="*"
+        android:visibility="visible"
+        android:padding="5dp">
+
+        <TableRow
+            android:background="@android:color/holo_blue_light"
+            android:layout_marginBottom="2dp">
+
+            <TextView
+                android:text="NO"
+                android:textSize="15dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="2dp"
+                android:layout_height="match_parent" >
+                <View style="@style/visible" />
+            </LinearLayout>
+            <TextView
+                android:text="Kategori Hewan"
+                android:textSize="15dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="2dp"
+                android:layout_height="match_parent" >
+
+                <View style="@style/visible"
+                     />
+            </LinearLayout>
+            <TextView
+                android:text="Harga Beli"
+                android:textSize="15sp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent" >
+
+                <View style="@style/visible" />
+            </LinearLayout>
+            <TextView
+                android:text="Harga Jual"
+                android:textSize="15sp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent" >
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_height="36dp"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="Tanggal Jual"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </TableRow>
+
+        <TableRow
+            android:background="@android:color/holo_green_light">
+            <TextView
+                android:id="@+id/view_idHewan"
+                android:text=""
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="left"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent" >
+
+                <View style="@style/visible" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/view_kategorihewan"
+                android:text="225"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="left"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent" >
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/view_tabelbeli"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="232"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent" >
+
+                <View style="@style/visible" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/view_tabeljual"
+                android:text="245"
+                android:textSize="15sp"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:gravity="left"
+                android:textColor="@android:color/white"/>
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+
+                android:id="@+id/view_tabeltanggal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="245"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_light">
+
+            <TextView
+                android:id="@+id/view_idhewan"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/f"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="225"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/view_hargabeli"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="232"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/view_hargajual"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="245"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+                <View style="@style/visible" />
+            </LinearLayout>
+
+            <TextView
+
+                android:id="@+id/view_tgljual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="245"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

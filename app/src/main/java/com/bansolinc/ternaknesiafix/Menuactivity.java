@@ -17,9 +17,9 @@ public class Menuactivity extends AppCompatActivity {
         setContentView(R.layout.activity_menuactivity);
 
         ternakcard = (CardView) findViewById(R.id.ternakcard);
-//        penjualanid = (CardView)findViewById(R.id.penjualanid);
+       penjualanid = (CardView)findViewById(R.id.penjualancard);
         pembeliancard = (CardView)findViewById(R.id.pembeliancard);
-//        laporanid = (CardView)findViewById(R.id.laporanid);
+       laporanid = (CardView)findViewById(R.id.laporancard);
 
         ternakcard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +35,18 @@ public class Menuactivity extends AppCompatActivity {
                 startActivity(new Intent(Menuactivity.this, PembelianActivity.class));
             }
         });
-
+        penjualanid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pembelian) {
+                startActivity(new Intent(Menuactivity.this, PenjualanActivity.class));
+            }
+        });
+        laporanid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View pembelian) {
+                startActivity(new Intent(Menuactivity.this, LaporanActivity.class));
+            }
+        });
 
     }
 }

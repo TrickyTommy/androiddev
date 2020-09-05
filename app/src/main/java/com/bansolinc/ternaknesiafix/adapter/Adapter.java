@@ -58,7 +58,7 @@ public class Adapter extends BaseAdapter {
         TextView txt_tinggiHewan = (TextView) convertView.findViewById(R.id.viewtinggi_hewan);
         TextView txt_jenisKelamin = (TextView) convertView.findViewById(R.id.viewjenis_kelamin);
         TextView txt_tanggalPembelian = (TextView) convertView.findViewById(R.id.viewtanggal_beli);
-
+        TextView txt_statusJual = (TextView) convertView.findViewById(R.id.viewstatus_jual);
 
         txt_nama.setText(item.get(position).getNama_kategori());
         txt_hargaBeli.setText(item.get(position).getHarga_beli());
@@ -66,6 +66,7 @@ public class Adapter extends BaseAdapter {
         txt_tinggiHewan.setText(item.get(position).getTinggi_hewan());
         txt_jenisKelamin.setText(item.get(position).getJenis_kelamin());
         txt_tanggalPembelian.setText(item.get(position).getTanggal_beli());
+        txt_statusJual.setText(item.get(position).getStatus_jual());
 
 
         return convertView;

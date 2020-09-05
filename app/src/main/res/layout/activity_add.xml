@@ -23,8 +23,8 @@
                 android:id="@+id/Ka"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="5sp"
+                android:layout_weight="1"
                 android:text="KATEGORI" />
 
             <Spinner
@@ -37,63 +37,64 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:text="Harga beli"
                 android:textSize="14sp"
-                android:layout_marginLeft="5sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/harga_beli"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Harga beli"
-                android:layout_marginLeft="5sp"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:text="Berat hewan"
-                android:layout_marginLeft="5sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/bobot_beli"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Berat hewan"
-                android:layout_marginLeft="5sp"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:text="Tinggi Hewan"
-                android:layout_marginLeft="5sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/tinggi_hewan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Tinggi hewan"
-                android:layout_marginLeft="5sp"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:text="Jenis Kelamin"
-                android:layout_marginLeft="5sp"
                 android:textStyle="bold" />
 
             <Spinner
@@ -107,9 +108,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
                 android:layout_weight="1"
                 android:text="Status hewan"
-                android:layout_marginLeft="5sp"
                 android:textStyle="bold" />
 
             <Spinner

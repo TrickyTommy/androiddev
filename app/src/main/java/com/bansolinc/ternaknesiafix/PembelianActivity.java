@@ -1,8 +1,11 @@
 package com.bansolinc.ternaknesiafix;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,7 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -23,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.bansolinc.ternaknesiafix.adapter.Adapter;
 import com.bansolinc.ternaknesiafix.app.AppController;
 import com.bansolinc.ternaknesiafix.model.DataModel;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +44,8 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.bansolinc.ternaknesiafix.BuildConfig.BASE_URL;
+
 public class PembelianActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
         SearchView.OnQueryTextListener {
 
@@ -48,13 +55,17 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
     SwipeRefreshLayout swipe;
     ListView list_view;
 
-
     /* 10.0.2.2 adalah IP Address localhost EMULATOR ANDROID STUDIO,
     Ganti IP Address tersebut dengan IP Laptop Apabila di RUN di HP. HP dan Laptop harus 1 jaringan */
-    public static final String url_data = "http://172.18.1.175/connectandroid/includes/tampilpembelian.php";
-    public static final String url_cari = "http://172.18.1.175/connectandroid/includes/cari_data.php";
+   // public static final String url_data = "http://trickyserver.ddns.net/connectandroid/includes/tampilpembelian.php";
+//    public static final String url_data = "http://192.168.0.20/connectandroid/includes/tampilpembelian.php";
+//   // public static final String url_cari = "http://trickyserver.ddns.net/connectandroid/includes/cari_data.php";
+//    public static final String url_cari = "http://192.168.0.20/connectandroid/includes/cari_data.php";
+    public static final String url_data = BASE_URL+"tampilpembelian.php/";
+    public static final String url_cari = BASE_URL+"cari_data.php/";
 
     private static final String TAG = PembelianActivity.class.getSimpleName();
+
 
     public static final String TAG_ID = "id_hewan";
     public static final String TAG_NAMA = "nama_kategori";
@@ -63,12 +74,14 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
     public static final String TAG_tinggi_hewan = "tinggi_hewan";
     public static final String TAG_jenis_kelamin = "jenis_kelamin";
     public static final String TAG_tanggal_beli = "tanggal_beli";
+    public static final String TAG_status_jual = "status_jual";
     public static final String TAG_RESULTS = "results";
     public static final String TAG_MESSAGE = "message";
     public static final String TAG_VALUE = "value";
+    FloatingActionButton fab1,fab2;
+    Boolean isFABOpen = false;
 
     String tag_json_obj = "json_obj_req";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +104,56 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
                        }
                    }
         );
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) findViewById(R.id.tambahpembelian);
+        fab2 = (FloatingActionButton) findViewById(R.id.tambahpembeliankg);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isFABOpen){
+                    showFABMenu();
+                }else{
+                    closeFABMenu();
+                }
+            }
+        });
+
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                startActivity(new Intent(PembelianActivity.this, AddActivity.class));
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                startActivity(new Intent(PembelianActivity.this, AddActivityKg.class));
+            }
+        });
+
+
+
+
+
+    }
+    private void showFABMenu(){
+        isFABOpen = true;
+        fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+
+    }
+
+    private void closeFABMenu(){
+        isFABOpen=false;
+        fab1.animate().translationY(0);
+        fab2.animate().translationY(0);
 
     }
 
@@ -120,6 +183,7 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
                         item.setTinggi_hewan(obj.getString(TAG_tinggi_hewan));
                         item.setJenis_kelamin(obj.getString(TAG_jenis_kelamin));
                         item.setTanggal_beli(obj.getString(TAG_tanggal_beli));
+                        item.setStatus_jual(obj.getString(TAG_status_jual));
 
                         listData.add(item);
                     } catch (JSONException e) {
@@ -145,7 +209,6 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jArr);
     }
-
 
     @Override
     public void onRefresh() {
@@ -192,7 +255,7 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
                     int value = jObj.getInt(TAG_VALUE);
 
                     if (value == 1) {
-//                        listData.clear();
+                        listData.clear();
                         adapter.notifyDataSetChanged();
 
                         String getObject = jObj.getString(TAG_RESULTS);
@@ -210,7 +273,7 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
                             data.setTinggi_hewan(obj.getString(TAG_tinggi_hewan));
                             data.setJenis_kelamin(obj.getString(TAG_jenis_kelamin));
                             data.setTanggal_beli(obj.getString(TAG_tanggal_beli));
-
+                            data.setStatus_jual(obj.getString(TAG_status_jual));
 
                             listData.add(data);
                         }
@@ -218,7 +281,6 @@ public class PembelianActivity extends AppCompatActivity implements SwipeRefresh
                     } else {
                         Toast.makeText(getApplicationContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
                     }
-
 
                 } catch (JSONException e) {
                     // JSON error

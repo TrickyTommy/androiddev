@@ -5,21 +5,25 @@ package com.bansolinc.ternaknesiafix.model;
  */
 
 public class DataModel {
-    private String id_hewan, nama_kategori, harga_beli, bobot_beli, tinggi_hewan, jenis_kelamin, tanggal_beli;
+    private String id_hewan, nama_kategori, harga_beli,harga_jual, bobot_beli,bobot_jual, tinggi_hewan,tinggi_hewan_jual, jenis_kelamin, tanggal_beli,tanggal_penjualan,status_jual;
 
 
     public DataModel() {
     }
 
-    public DataModel(String id_hewan, String nama_kategori, String harga_beli, String bobot_beli, String tinggi_hewan, String jenis_kelamin, String tanggal_beli) {
+    public DataModel(String id_hewan, String nama_kategori, String harga_beli, String harga_jual, String bobot_beli, String bobot_jual, String tinggi_hewan, String tinggi_hewan_jual, String jenis_kelamin, String tanggal_beli, String tanggal_penjualan, String status_jual) {
         this.id_hewan = id_hewan;
         this.nama_kategori = nama_kategori;
-        this.nama_kategori = nama_kategori;
         this.harga_beli = harga_beli;
+        this.harga_jual = harga_jual;
         this.bobot_beli = bobot_beli;
+        this.bobot_jual = bobot_jual;
         this.tinggi_hewan = tinggi_hewan;
+        this.tinggi_hewan_jual = tinggi_hewan_jual;
         this.jenis_kelamin = jenis_kelamin;
         this.tanggal_beli = tanggal_beli;
+        this.tanggal_penjualan = tanggal_penjualan;
+        this.status_jual = status_jual;
     }
 
     public String getId_hewan() {
@@ -46,6 +50,14 @@ public class DataModel {
         this.harga_beli = harga_beli;
     }
 
+    public String getHarga_jual() {
+        return harga_jual;
+    }
+
+    public void setHarga_jual(String harga_jual) {
+        this.harga_jual = harga_jual;
+    }
+
     public String getBobot_beli() {
         return bobot_beli;
     }
@@ -54,12 +66,28 @@ public class DataModel {
         this.bobot_beli = bobot_beli;
     }
 
+    public String getBobot_jual() {
+        return bobot_jual;
+    }
+
+    public void setBobot_jual(String bobot_jual) {
+        this.bobot_jual = bobot_jual;
+    }
+
     public String getTinggi_hewan() {
         return tinggi_hewan;
     }
 
     public void setTinggi_hewan(String tinggi_hewan) {
         this.tinggi_hewan = tinggi_hewan;
+    }
+
+    public String getTinggi_hewan_jual() {
+        return tinggi_hewan_jual;
+    }
+
+    public void setTinggi_hewan_jual(String tinggi_hewan_jual) {
+        this.tinggi_hewan_jual = tinggi_hewan_jual;
     }
 
     public String getJenis_kelamin() {
@@ -76,5 +104,21 @@ public class DataModel {
 
     public void setTanggal_beli(String tanggal_beli) {
         this.tanggal_beli = tanggal_beli;
+    }
+
+    public String getTanggal_penjualan() {
+        return tanggal_penjualan;
+    }
+
+    public void setTanggal_penjualan(String tanggal_penjualan) {
+        this.tanggal_penjualan = tanggal_penjualan;
+    }
+
+    public String getStatus_jual() {
+        return status_jual;
+    }
+
+    public void setStatus_jual(String status_jual) {
+        this.status_jual = status_jual;
     }
 }
